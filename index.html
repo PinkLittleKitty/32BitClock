@@ -18,6 +18,7 @@
 </head>
 <body>
   <div id="clock"></div>
+  <div id="countdown"></div>
 
   <script>
     function updateClock() {
@@ -35,9 +36,26 @@
       clock.innerHTML = bytes.join(' ') + '<br>' + now.toLocaleTimeString();
     }
 
+    function updateCountdown() {
+      var now = new Date();
+      var y2k38 = new Date(2147483647000); // Represents the time in milliseconds until the Y2K38 problem
+      
+      var timeDifference = y2k38 - now;
+
+      var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+      var countdown = document.getElementById('countdown');
+      countdown.innerHTML = 'Time until Y2K38: ' + days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
+    }
+
     setInterval(updateClock, 1000);
+    setInterval(updateCountdown, 1000);
 
     updateClock();
+    updateCountdown();
   </script>
 </body>
 </html>
