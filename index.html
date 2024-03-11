@@ -34,6 +34,13 @@
       }
 
       clock.innerHTML = bytes.join(' ') + '<br>' + now.toLocaleTimeString();
+
+      // Get Hex triplet from current time
+      var hexColor = '#' + ('0' + now.getHours().toString(16)).slice(-2) +
+                           ('0' + now.getMinutes().toString(16)).slice(-2) +
+                           ('0' + now.getSeconds().toString(16)).slice(-2);
+
+      document.body.style.backgroundColor = hexColor;
     }
 
     function updateCountdown() {
